@@ -10,6 +10,7 @@ public:
     void setup();
     void update();
     void draw();
+    void drawScene();
 
     void keyPressed(int key);
     void keyReleased(int key);
@@ -22,7 +23,19 @@ public:
     void gotMessage(ofMessage msg);
 		
     ofxFPSCamera camera;
-    
-    
     ofCylinderPrimitive cylinders [50];
+    
+    ofxOculusDK2		oculusRift;
+    
+    ofLight				light;
+    bool showOverlay;
+    bool predictive;
+    
+    ofVec3f cursor2D;
+    ofVec3f cursor3D;
+    
+    ofVec3f cursorRift;
+    ofVec3f demoRift;
+    
+    ofVec3f cursorGaze;
 };
