@@ -1,80 +1,43 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-void ofApp::setup()
-{
+void ofApp::setup(){
     ofBackground(0);
     ofSetLogLevel( OF_LOG_VERBOSE );
     ofSetVerticalSync( true );
     
-    //    ofSetWindowPosition(1920, 0);
-    //    ofToggleFullscreen();
+    camera.setup();
+    camera.target(ofVec3f(1,0,0));
+    
     showOverlay = false;
     predictive = true;
     
     ofHideCursor();
-    
-    oculusRift.baseCamera = &cam;
+    oculusRift.baseCamera = &camera;
     oculusRift.setup();
     
-    for(int i = 0; i < 20; i++){
-        DemoSphere d;
-        d.color = ofColor(ofRandom(255),
-                          ofRandom(255),
-                          ofRandom(255));
-        
-        d.pos = ofVec3f(ofRandom(-500, 500),0,ofRandom(-500,500));
-        
-        d.floatPos.x = d.pos.x;
-        d.floatPos.z = d.pos.z;
-        
-        d.radius = ofRandom(2, 50);
-        
-        d.bMouseOver = false;
-        d.bGazeOver  = false;
-        
-        demos.push_back(d);
+    
+    for (int i = 0; i < 50; i++) {
+        cylinders[i].set(20,100);
+        cylinders[i].setPosition(ofRandom(0,ofGetWidth()), 0, ofRandom(-600,600));
     }
     
-    //enable mouse;
-    cam.begin();
-    cam.end();
+    
+    //ofHideCursor();
+    ofSetWindowPosition(ofGetScreenWidth()/2 - ofGetWidth()/2, ofGetScreenHeight()/2 - ofGetHeight()/2);
+    
+    camera.begin();
+    camera.end();
+    
+    
 }
 
-
 //--------------------------------------------------------------
-void ofApp::update()
-{
-    for(int i = 0; i < demos.size(); i++){
-        demos[i].floatPos.y = ofSignedNoise(ofGetElapsedTimef()/10.0,
-                                            demos[i].pos.x/100.0,
-                                            demos[i].pos.z/100.0,
-                                            demos[i].radius*100.0) * demos[i].radius*20.;
-        
-    }
-    
-    if(oculusRift.isSetup()){
-        ofRectangle viewport = oculusRift.getOculusViewport();
-        for(int i = 0; i < demos.size(); i++){
-            // mouse selection
-            float mouseDist = oculusRift.distanceFromMouse(demos[i].floatPos);
-            demos[i].bMouseOver = (mouseDist < 50);
-            
-            // gaze selection
-            ofVec3f screenPos = oculusRift.worldToScreen(demos[i].floatPos, true);
-            float gazeDist = ofDist(screenPos.x, screenPos.y,
-                                    viewport.getCenter().x, viewport.getCenter().y);
-            demos[i].bGazeOver = (gazeDist < 25);
-        }
-    }
+void ofApp::update(){
 }
 
-
 //--------------------------------------------------------------
-void ofApp::draw()
-{
-    
-    
+void ofApp::draw(){
     if(oculusRift.isSetup()){
         
         if(showOverlay){
@@ -118,44 +81,31 @@ void ofApp::draw()
         glDisable(GL_DEPTH_TEST);
     }
     else{
-        cam.begin();
+        camera.begin();
         drawScene();
-        cam.end();
+        camera.end();
     }
-    
 }
 
 //--------------------------------------------------------------
-void ofApp::drawScene()
-{
+void ofApp::drawScene(){
+    //ofBackground(0);
     
-    ofPushMatrix();
-    ofRotate(90, 0, 0, -1);
-    ofDrawGridPlane(500.0f, 10.0f, false );
-    ofPopMatrix();
     
-    ofPushStyle();
-    ofNoFill();
-    for(int i = 0; i < demos.size(); i++){
-        ofPushMatrix();
-        //		ofRotate(ofGetElapsedTimef()*(50-demos[i].radius), 0, 1, 0);
-        ofTranslate(demos[i].floatPos);
-        //		ofRotate(ofGetElapsedTimef()*4*(50-demos[i].radius), 0, 1, 0);
-        
-        if (demos[i].bMouseOver)
-            ofSetColor(ofColor::white.getLerped(ofColor::red, sin(ofGetElapsedTimef()*10.0)*.5+.5));
-        else if (demos[i].bGazeOver)
-            ofSetColor(ofColor::white.getLerped(ofColor::green, sin(ofGetElapsedTimef()*10.0)*.5+.5));
-        else
-            ofSetColor(demos[i].color);
-        
-        ofSphere(demos[i].radius);
-        ofPopMatrix();
+    
+    ofSetColor(100);
+    int step = 20;
+    for (int i = 0; i < step; i++) {
+        ofLine(i*ofGetWidth()/step, -50, -ofGetWidth(), i*ofGetWidth()/step, -50, ofGetWidth());
+        ofLine(0, -50, i*ofGetWidth()/step, ofGetWidth(), -50, i*ofGetWidth()/step);
+        ofLine(0, -50, -i*ofGetWidth()/step, ofGetWidth(), -50, -i*ofGetWidth()/step);
     }
     
+    ofSetColor(255);
+    for (int i = 0; i < 50; i++) {
+        cylinders[i].drawWireframe();
+    }
     
-    
-    //billboard and draw the mouse
     if(oculusRift.isSetup()){
         
         ofPushMatrix();
@@ -166,17 +116,38 @@ void ofApp::drawScene()
         
     }
     
-    ofPopStyle();
+    
+    /*
+     ofSetColor(255);
+     ofDrawBitmapString("use mouse to look around\nw: forward\ns: backwards\na: strafe left\nd: strafe right\n\nspace bar: reset camera to (0,0,0)\ne: toggle movement ease-in\nf: toggle full-screen\nsee testApp.cpp for available methods and vars", ofPoint(30, 30));
+     
+     if (camera.easeIn) {
+     ofDrawBitmapString("easing is ON", ofPoint(30, ofGetHeight()-30));
+     } else {
+     ofDrawBitmapString("easing is OFF", ofPoint(30, ofGetHeight()-30));
+     }
+     */
     
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key)
-{
-    if( key == 'f' )
-    {
-        //gotta toggle full screen for it to be right
-        ofToggleFullscreen();
+void ofApp::keyPressed(int key){
+    switch (key) {
+        case ' ':
+            camera.setPosition(0, 0, 0);
+            camera.target(ofVec3f(1,0,0));
+            break;
+            
+        case 'f':
+            ofToggleFullscreen();
+            break;
+            
+        case 'e':
+            camera.easeIn = !camera.easeIn;
+            break;
+            
+        default:
+            break;
     }
     
     if(key == 's'){
@@ -208,49 +179,41 @@ void ofApp::keyPressed(int key)
 }
 
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key)
-{
+void ofApp::keyReleased(int key){
     
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y)
-{
-    //   cursor2D.set(x, y, cursor2D.z);
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button)
-{
-    //    cursor2D.set(x, y, cursor2D.z);
-}
-
-//--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button)
-{
+void ofApp::mouseMoved(int x, int y ){
     
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button)
-{
+void ofApp::mouseDragged(int x, int y, int button){
     
 }
 
 //--------------------------------------------------------------
-void ofApp::windowResized(int w, int h)
-{
+void ofApp::mousePressed(int x, int y, int button){
     
 }
 
 //--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg)
-{
+void ofApp::mouseReleased(int x, int y, int button){
     
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo)
-{
+void ofApp::windowResized(int w, int h){
+    
+}
+
+//--------------------------------------------------------------
+void ofApp::gotMessage(ofMessage msg){
+    
+}
+
+//--------------------------------------------------------------
+void ofApp::dragEvent(ofDragInfo dragInfo){
     
 }
