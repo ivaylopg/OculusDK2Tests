@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxOculusDK2.h"
+#include "ofxFPSCamera.h"
 
 class ofApp : public ofBaseApp{
 public:

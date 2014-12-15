@@ -27,6 +27,11 @@
 		E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */; };
 		E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E715D3B6510020DFD4 /* QTKit.framework */; };
 		E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
+		F93CDB621A3E843900B95454 /* ofxFPSCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F93CDB601A3E843900B95454 /* ofxFPSCamera.cpp */; };
+		F93CDB6C1A3E844100B95454 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F93CDB651A3E844100B95454 /* ofxXmlSettings.cpp */; };
+		F93CDB6D1A3E844100B95454 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F93CDB681A3E844100B95454 /* tinyxml.cpp */; };
+		F93CDB6E1A3E844100B95454 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F93CDB6A1A3E844100B95454 /* tinyxmlerror.cpp */; };
+		F93CDB6F1A3E844100B95454 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F93CDB6B1A3E844100B95454 /* tinyxmlparser.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -252,6 +257,14 @@
 		F7A73F173A675A0050951C5F /* CAPI_D3D9_HSWDisplay.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = CAPI_D3D9_HSWDisplay.cpp; path = ../../../addons/ofxOculusDK2/libs/LibOVR/Src/CAPI/D3D1X/CAPI_D3D9_HSWDisplay.cpp; sourceTree = SOURCE_ROOT; };
 		F80DC68F895293939093FE49 /* CAPI_D3D1X_Util.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = CAPI_D3D1X_Util.cpp; path = ../../../addons/ofxOculusDK2/libs/LibOVR/Src/CAPI/D3D1X/CAPI_D3D1X_Util.cpp; sourceTree = SOURCE_ROOT; };
 		F8677DF205301B25F76C91BE /* OVR_Lockless.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = OVR_Lockless.h; path = ../../../addons/ofxOculusDK2/libs/LibOVR/Src/Kernel/OVR_Lockless.h; sourceTree = SOURCE_ROOT; };
+		F93CDB601A3E843900B95454 /* ofxFPSCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFPSCamera.cpp; sourceTree = "<group>"; };
+		F93CDB611A3E843900B95454 /* ofxFPSCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxFPSCamera.h; sourceTree = "<group>"; };
+		F93CDB651A3E844100B95454 /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
+		F93CDB661A3E844100B95454 /* ofxXmlSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
+		F93CDB681A3E844100B95454 /* tinyxml.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
+		F93CDB691A3E844100B95454 /* tinyxml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
+		F93CDB6A1A3E844100B95454 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
+		F93CDB6B1A3E844100B95454 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		F940A3DB77BA64C1ED1B81C9 /* OVR_Std.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = OVR_Std.cpp; path = ../../../addons/ofxOculusDK2/libs/LibOVR/Src/Kernel/OVR_Std.cpp; sourceTree = SOURCE_ROOT; };
 		FA1B4E0C792661B88A8B2CC8 /* CAPI_D3D1X_DistortionRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = CAPI_D3D1X_DistortionRenderer.h; path = ../../../addons/ofxOculusDK2/libs/LibOVR/Src/CAPI/D3D1X/CAPI_D3D1X_DistortionRenderer.h; sourceTree = SOURCE_ROOT; };
 		FB0ECEAF9755D56EE72ED782 /* OVR_Math.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = OVR_Math.cpp; path = ../../../addons/ofxOculusDK2/libs/LibOVR/Src/Kernel/OVR_Math.cpp; sourceTree = SOURCE_ROOT; };
@@ -469,6 +482,8 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				F93CDB631A3E844100B95454 /* ofxXmlSettings */,
+				F93CDB5E1A3E843900B95454 /* ofxFPSCamera */,
 				AAA2DD15CF09CE1D309C646D /* ofxOculusDK2 */,
 			);
 			name = addons;
@@ -711,6 +726,55 @@
 			name = Tracking;
 			sourceTree = "<group>";
 		};
+		F93CDB5E1A3E843900B95454 /* ofxFPSCamera */ = {
+			isa = PBXGroup;
+			children = (
+				F93CDB5F1A3E843900B95454 /* src */,
+			);
+			name = ofxFPSCamera;
+			sourceTree = "<group>";
+		};
+		F93CDB5F1A3E843900B95454 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				F93CDB601A3E843900B95454 /* ofxFPSCamera.cpp */,
+				F93CDB611A3E843900B95454 /* ofxFPSCamera.h */,
+			);
+			name = src;
+			path = ../../../addons/ofxFPSCamera/src;
+			sourceTree = "<group>";
+		};
+		F93CDB631A3E844100B95454 /* ofxXmlSettings */ = {
+			isa = PBXGroup;
+			children = (
+				F93CDB641A3E844100B95454 /* src */,
+				F93CDB671A3E844100B95454 /* libs */,
+			);
+			name = ofxXmlSettings;
+			sourceTree = "<group>";
+		};
+		F93CDB641A3E844100B95454 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				F93CDB651A3E844100B95454 /* ofxXmlSettings.cpp */,
+				F93CDB661A3E844100B95454 /* ofxXmlSettings.h */,
+			);
+			name = src;
+			path = ../../../addons/ofxXmlSettings/src;
+			sourceTree = "<group>";
+		};
+		F93CDB671A3E844100B95454 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				F93CDB681A3E844100B95454 /* tinyxml.cpp */,
+				F93CDB691A3E844100B95454 /* tinyxml.h */,
+				F93CDB6A1A3E844100B95454 /* tinyxmlerror.cpp */,
+				F93CDB6B1A3E844100B95454 /* tinyxmlparser.cpp */,
+			);
+			name = libs;
+			path = ../../../addons/ofxXmlSettings/libs;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -798,8 +862,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F93CDB621A3E843900B95454 /* ofxFPSCamera.cpp in Sources */,
+				F93CDB6D1A3E844100B95454 /* tinyxml.cpp in Sources */,
 				C7FDF0C3E44C93073275659E /* ofxOculusDK2.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
+				F93CDB6F1A3E844100B95454 /* tinyxmlparser.cpp in Sources */,
+				F93CDB6C1A3E844100B95454 /* ofxXmlSettings.cpp in Sources */,
+				F93CDB6E1A3E844100B95454 /* tinyxmlerror.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1024,6 +1093,7 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1109,6 +1179,7 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
