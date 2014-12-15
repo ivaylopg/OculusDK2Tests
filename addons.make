@@ -1,3 +1,0 @@
-ofxXmlSettings
-ofxFPSCamera
-ofxOculusDK2
